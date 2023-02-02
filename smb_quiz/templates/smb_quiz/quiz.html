@@ -1,0 +1,36 @@
+{% extends "smb_quiz/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="sprite">
+        Star<br>
+        Star<br>
+        Star<br>
+    </div>
+{#    {{ questions }}#}
+{#    {% for q in questions %}#}
+{#        <p>{{ q.0 }}</p>#}
+{#    {% endfor %}#}
+    {% for q in questions %}
+        <p>
+            <span>{{ q.0 }}. </span>{{ q.1 }} {# Question #}
+        </p>
+        <div class="answer-options">
+            <div class="option">
+                <a class="btn-circle btn-{{ q.0 }}">A</a>
+                <p>{{ q.2.0 }}</p> {# Shuffled answer #}
+            </div>
+            <div class="option">
+                <a class="btn-circle btn-{{ q.0 }}">B</a>
+                <p>{{ q.2.1 }}</p> {# Shuffled answer #}
+            </div>
+            <div class="option">
+                <a class="btn-circle btn-{{ q.0 }}">C</a>
+                <p>{{ q.2.2 }}</p> {# Shuffled answer #}
+            </div>
+            <p>{{ q.3 }}</p> {# Correct answer to be set as variable (JS: if user choise innerText === q.2) #}
+        </div>
+    {% endfor %}
+    {{ correct_answers|json_script:"correctAnswers" }}
+    <script src="{% static 'smb_quiz/script.js' %}"></script>
+{% endblock content %}

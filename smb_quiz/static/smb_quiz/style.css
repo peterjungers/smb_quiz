@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Press+Start+2P&display=swap');
+
+
+/* || CSS RESET */
+html, body, header, main, footer, section, h1, h2, h3, h4, p, a, ul, li, table, caption, th, tr, td, img, figure, figcaption {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+    /*max-height: 100vh;*/
+}
+
+#container {
+    /*background-color: gray;*/
+    display: grid;
+    grid-template-rows: repeat(3, max-content);
+    /*justify-items: center;*/
+    row-gap: 2rem;
+    margin: 1.5rem;
+}
+
+h1 {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 2rem;
+}
+
+p {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    line-height: 1.75rem;
+}
+
+a {
+    text-decoration: none;
+    color: #f1f1f1;
+}
+
+.btn-rectangle {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    padding: 1.1rem 1.5rem;
+    margin: 1rem 0;
+    border: 1px solid #f1f1f1;
+    border-radius: 20px;
+}
+
+.btn-circle {
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    padding: 1.1rem;
+    padding-left: 1.2rem; /* Necessary because font itself is slightly off-center */
+    border: 1px solid #f1f1f1;
+    border-radius: 50%;
+}
+
+.sprite {
+    justify-self: center;
+}
+
+.answer-options {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    row-gap: 1.25rem;
+    padding: 0 2rem;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem; /* Make always at bottom */
+}
+
+footer p {
+    font-size: .5rem;
+    line-height: 1rem;
+}
+
+footer a {
+    text-decoration: underline;
+    text-decoration-thickness: .03em;
+    text-underline-offset: 2px;
+}
+
+
+/*@media screen and (max-height: 480px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {*/
+/*    .hide-mobile-landscape {*/
+/*        display: none;*/
+/*    }*/
+
+/*    .show-mobile-landscape {*/
+/*        display: block;*/
+/*    }*/
+
+/*    #container {*/
+/*        grid-template-rows: 1fr;*/
+/*        align-items: center;*/
+/*        justify-content: center;*/
+/*        height: 100vh;*/
+/*        margin: 0;*/
+/*    }*/
+/*}*/

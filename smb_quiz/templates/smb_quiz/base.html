@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'smb_quiz/style.css' %}">
+
+    <title>Super Mario Bros. quiz</title>
+</head>
+<body>
+    <div id="container">
+        <h1>Super Mario Bros. quiz</h1>
+        {% block content %}{% endblock content %}
+    <footer>
+        <p>Written and designed by <a href="#">Peter Jungers</a>, 2023</p>
+        <p>Original pixel art made using in-game sprites as reference</p>
+    </footer>
+    </div>
+</body>
+</html>
