@@ -7,13 +7,11 @@
         Star<br>
         Star<br>
     </div>
-{#    {{ questions }}#}
-{#    {% for q in questions %}#}
-{#        <p>{{ q.0 }}</p>#}
-{#    {% endfor %}#}
+
     {% for q in questions %}
         <p>
-            <span>{{ q.0 }}. </span>{{ q.1 }} {# Question #}
+            <span>{{ q.0 }}. </span> {# Question number #}
+            {{ q.1 }} {# Question #}
         </p>
         <div class="answer-options">
             <div class="option">
@@ -28,9 +26,9 @@
                 <a class="btn-circle btn-{{ q.0 }}">C</a>
                 <p>{{ q.2.2 }}</p> {# Shuffled answer #}
             </div>
-            <p>{{ q.3 }}</p> {# Correct answer to be set as variable (JS: if user choise innerText === q.2) #}
+            <p id="message-{{ q.0 }}"></p>
         </div>
     {% endfor %}
-    {{ correct_answers|json_script:"correctAnswers" }}
+    {{ array|json_script:"array" }} {# Array of encoded correct answers for JS file #}
     <script src="{% static 'smb_quiz/script.js' %}"></script>
 {% endblock content %}

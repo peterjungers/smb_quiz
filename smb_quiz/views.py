@@ -31,7 +31,7 @@ def index(request):
 
 def quiz(request):
     # This will be done with objects, not dictionaries:
-    num = 0
+    num = 1
     questions = []
     correct_answers = []
     for q in db:
@@ -41,15 +41,23 @@ def quiz(request):
             q["answer"], q["wrong_answer_1"], q["wrong_answer_2"]
         ]
         random.shuffle(answers)
-        question_answers = num, q["question"], answers, correct
+        question_answers = num, q["question"], answers
         questions.append(question_answers)
         num +=1
 
-    print(questions)
+    # Silly little encryption so answers aren't readily visible
+    # in dev tools :)
+    coded_answers = []
+    for answer in correct_answers:
+        a = ""
+        for letter in answer:
+            letter = chr(ord(letter) + 5)
+            a += letter
+        coded_answers.append(a)
 
     context = {
         "questions": questions,
-        "correct_answers": correct_answers
+        "array": coded_answers
     }
 
     return render(request, "smb_quiz/quiz.html", context)
