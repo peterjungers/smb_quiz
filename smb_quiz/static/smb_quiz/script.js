@@ -1,6 +1,5 @@
 const optionBtns = document.querySelectorAll(".option a");
-const codedAnswers = JSON.parse(
-    document.getElementById("array").textContent)
+const codedAnswers = JSON.parse(document.querySelector("#array").textContent)
 
 
 function decodeAnswers() {
@@ -16,16 +15,17 @@ function decodeAnswers() {
     checkBtnAnswer(correctAnswers);
 }
 
+
 function checkBtnAnswer(correctAnswers) {
+    let counter = 0;
     optionBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             for (let i = 0; i <= optionBtns.length; i ++) {
                 // Match index number to actual btn number, hence i + 1
                 if (btn.classList.contains(`btn-${i + 1}`)) {
                     let allOptions = btn.parentElement.parentElement.children;
-                    let message = document.querySelector(`#message-${i + 1}`);
+                    let message = document.querySelector(`.message-${i + 1}`);
 
-                    console.log(allOptions);
                     btn.style.backgroundColor = "#f1f1f1";
                     btn.style.color = "#1a1a1a";
                     if (btn.nextElementSibling.innerText
@@ -37,20 +37,22 @@ function checkBtnAnswer(correctAnswers) {
                         }
                         message.style.opacity = 1;
                         message.innerText = "Correct!";
+                        counter += 1;
                     } else {
                         for (let i = 0; i < allOptions.length; i++) {
                             allOptions[i].style.opacity = .5;
                         }
                         message.innerText = "Sorry, incorrect.";
                     }
-                    for (let i = 0; i <= allOptions.length; i++) {
+                    for (let i = 0; i < allOptions.length; i++) {
                         allOptions[i].style.pointerEvents = "none";
                     }
                 }
             }
+            console.log(counter);
         });
     });
 }
 
+
 window.addEventListener("DOMContentLoaded", decodeAnswers);
-// window.addEventListener("DOMContentLoaded", checkBtnAnswer);
