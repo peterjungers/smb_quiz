@@ -29,6 +29,24 @@
             <p class="message-{{ q.0 }}"></p>
         </div>
     {% endfor %}
+
+    <div id="score-container">
+        <div id="score-sprite">
+            Mushroom<br>
+            Mushroom<br>
+            Mushroom<br>
+        </div>
+        <p id="calculating-score">Calculating your score<span id="dots"></span></p>
+        <div id="score-results">
+            <div id="score-circle"><p></p></div>
+            <p id="score-message"></p>
+        </div>
+    </div>
+
+    <a class="btn-rectangle" href="{% url 'smb-quiz-quiz' %}">Reset quiz</a>
+
+
+
     {{ array|json_script:"array" }} {# Array of encoded correct answers for JS file #}
     <script src="{% static 'smb_quiz/script.js' %}"></script>
 {% endblock content %}

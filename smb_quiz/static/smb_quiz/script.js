@@ -1,9 +1,9 @@
-const optionBtns = document.querySelectorAll(".option a");
-const codedAnswers = JSON.parse(document.querySelector("#array").textContent)
 
 
 function decodeAnswers() {
+    const codedAnswers = JSON.parse(document.querySelector("#array").textContent)
     correctAnswers = [];
+
     codedAnswers.forEach(answer => {
         decodedAnswer = "";
         for (let i = 0; i < answer.length; i++) {
@@ -17,7 +17,10 @@ function decodeAnswers() {
 
 
 function checkBtnAnswer(correctAnswers) {
-    let counter = 0;
+    const optionBtns = document.querySelectorAll(".option a");
+    let counterCorrectAnswers = 0;
+    let counterAllQuestions = 0;
+
     optionBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             for (let i = 0; i <= optionBtns.length; i ++) {
@@ -37,21 +40,72 @@ function checkBtnAnswer(correctAnswers) {
                         }
                         message.style.opacity = 1;
                         message.innerText = "Correct!";
-                        counter += 1;
+                        counterCorrectAnswers += 1;
+                        counterAllQuestions += 1;
                     } else {
                         for (let i = 0; i < allOptions.length; i++) {
                             allOptions[i].style.opacity = .5;
                         }
                         message.innerText = "Sorry, incorrect.";
+                        counterAllQuestions += 1;
                     }
+                    // Disable question options after click
                     for (let i = 0; i < allOptions.length; i++) {
                         allOptions[i].style.pointerEvents = "none";
                     }
                 }
             }
-            console.log(counter);
+            if (counterAllQuestions === correctAnswers.length) {
+                const score = document.querySelector("#score-container");
+                score.scrollIntoView({behavior: "smooth", block: "start"});
+                showCalculating(counterCorrectAnswers, counterAllQuestions);
+            }
         });
     });
+}
+
+
+function showCalculating(counterCorrectAnswers, counterAllQuestions) {
+    const scoreSprite = document.querySelector("#score-sprite");
+    const calculatingScore = document.querySelector("#calculating-score");
+    const dotsSpan = document.querySelector("#dots");
+
+    scoreSprite.style.display = "none";
+
+    setTimeout(() => {
+        calculatingScore.style.display = "block";
+        addDots = setInterval(() => {
+            dotsSpan.innerText += " .";
+            if (dotsSpan.innerText.length === 8) {  // 4 spaces, 4 dots
+                clearInterval(addDots);
+                showFinalScore(counterCorrectAnswers, counterAllQuestions);
+            }
+        }, 1000);
+    }, 1000);
+}
+
+
+function showFinalScore(counterCorrectAnswers, counterAllQuestions) {
+    // calculatingScore contains calculating score message:
+    const calculatingScore = document.querySelector("#calculating-score");
+    // scoreResults contains score-circle and score-message elements:
+    const scoreResults = document.querySelector("#score-results");
+    const scoreCircleText = document.querySelector("#score-circle p");
+    const scoreMessage = document.querySelector("#score-message");
+
+    calculatingScore.style.display = "none";
+    scoreResults.style.display = "flex";
+    scoreCircleText.innerText = `${counterCorrectAnswers}/${counterAllQuestions}`;
+
+    if (counterCorrectAnswers === 10) {
+        scoreMessage.innerText = "Excellent!";
+    } else if (counterCorrectAnswers >= 8) {
+        scoreMessage.innerText = "Great job!";
+    } else if (counterCorrectAnswers >= 6) {
+        scoreMessage.innerText = "Pretty good!";
+    } else {
+        scoreMessage.innerText = "You'll do better next time!";
+    }
 }
 
 
