@@ -1,7 +1,77 @@
+/*
+JavaScript for Super Mario Bros. quiz
+Author: Peter Jungers
+Date: January/February 2023
+*/
+
+
+// Two functions pertaining to images throughout site:
+
+
+/*
+Help with the image randomizing function from
+https://www.peachpit.com/articles/article.aspx?p=2239154&seqNum=10
+*/
+function randomizeImages() {
+    imageDivs = document.querySelectorAll(".sprite");
+    // index page has only two images that always appear:
+    if (imageDivs.length === 2) {
+        images = imageDivs;
+    } else {  // quiz page (more info at showOrHideImages function):
+        showOrHideImages(imageDivs);
+        images = [
+            document.querySelector("#header-sprite"),
+            document.querySelector("#image-2"),
+            document.querySelector("#image-5"),
+            document.querySelector("#image-7"),
+            document.querySelector("#score-sprite")
+        ]
+    }
+
+    randomNumberArray = []
+    // 10 images in images directory, starting with 1.png
+    while (randomNumberArray.length < images.length) {
+        images.forEach(image => {
+            randomNumber = Math.floor((Math.random() * 10) + 1);
+            /* No repeated numbers in randomNumberArray
+            so there are no repeated images: */
+            if (!randomNumberArray.includes(randomNumber)) {
+                randomNumberArray.push(randomNumber);
+                image.src = `/static/smb_quiz/images/${randomNumber}.png`;
+                console.log(image.src);
+            }
+        });
+    }
+}
+
+
+// For quiz page images only:
+function showOrHideImages(images) {
+    /*
+    Because img divs are included programmatically for each quiz question,
+    and page design-wise not all questions should be followed by an image,
+    the following is necessary:
+    */
+    images.forEach(image => {
+        if (image.id === "header-sprite"
+            || image.id === "image-2"
+            || image.id === "image-5"
+            || image.id === "image-7"
+            || image.id === "score-sprite") {
+            image.style.display = "block";
+        } else {
+            image.style.display = "none";
+        }
+    });
+}
+
+
+// The remaining four functions are for handling of quiz questions and score:
 
 
 function decodeAnswers() {
-    const codedAnswers = JSON.parse(document.querySelector("#array").textContent)
+    const codedAnswers =
+        JSON.parse(document.querySelector("#array").textContent);
     correctAnswers = [];
 
     codedAnswers.forEach(answer => {
@@ -109,4 +179,10 @@ function showFinalScore(counterCorrectAnswers, counterAllQuestions) {
 }
 
 
-window.addEventListener("DOMContentLoaded", decodeAnswers);
+// Images sitewide:
+window.addEventListener("DOMContentLoaded", randomizeImages);
+
+// Quiz page questions and scoring:
+if (document.querySelector("#array")) {
+    window.addEventListener("DOMContentLoaded", decodeAnswers);
+}

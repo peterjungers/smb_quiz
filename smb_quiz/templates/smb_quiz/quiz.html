@@ -2,11 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <div class="sprite">
-        Star<br>
-        Star<br>
-        Star<br>
-    </div>
+    <img id="header-sprite" class="sprite" src="" alt="Pixel art">
 
     {% for q in questions %}
         <p>
@@ -28,14 +24,11 @@
             </div>
             <p class="message-{{ q.0 }}"></p>
         </div>
+        <img id="image-{{ q.0 }}" class="sprite" src="" alt="Pixel art">
     {% endfor %}
 
     <div id="score-container">
-        <div id="score-sprite">
-            Mushroom<br>
-            Mushroom<br>
-            Mushroom<br>
-        </div>
+        <img id= "score-sprite" class="sprite" src="" alt="Pixel art">
         <p id="calculating-score">Calculating your score<span id="dots"></span></p>
         <div id="score-results">
             <div id="score-circle"><p></p></div>
@@ -45,8 +38,5 @@
 
     <a class="btn-rectangle" href="{% url 'smb-quiz-quiz' %}">Reset quiz</a>
 
-
-
-    {{ array|json_script:"array" }} {# Array of encoded correct answers for JS file #}
-    <script src="{% static 'smb_quiz/script.js' %}"></script>
+    {{ array|json_script:"array" }} {# Array of slightly encoded correct answers for JS file #}
 {% endblock content %}
