@@ -23,24 +23,25 @@ function randomizeImages() {
             document.querySelector("#header-sprite"),
             document.querySelector("#image-2"),
             document.querySelector("#image-5"),
-            document.querySelector("#image-7"),
-            document.querySelector("#score-sprite")
+            document.querySelector("#image-7")
         ]
     }
 
+    /*
+    Images in static/images directory are numbered beginning with 1.
+    Amount of numbered images in directory is 12.
+    */
     randomNumberArray = []
-    // 10 images in images directory, starting with 1.png
     while (randomNumberArray.length < images.length) {
-        images.forEach(image => {
-            randomNumber = Math.floor((Math.random() * 10) + 1);
-            /* No repeated numbers in randomNumberArray
-            so there are no repeated images: */
-            if (!randomNumberArray.includes(randomNumber)) {
-                randomNumberArray.push(randomNumber);
-                image.src = `/static/smb_quiz/images/${randomNumber}.png`;
-                console.log(image.src);
-            }
-        });
+        randomNumber = Math.floor((Math.random() * 12) + 1);
+        /* No repeated numbers allowed in randomNumberArray
+        so no images get repeated: */
+        if (!randomNumberArray.includes(randomNumber)) {
+            randomNumberArray.push(randomNumber);
+        }
+    }
+    for (i = 0; i < randomNumberArray.length; i++) {
+        images[i].src = `/static/smb_quiz/images/${randomNumberArray[i]}.png`;
     }
 }
 
@@ -167,11 +168,11 @@ function showFinalScore(counterCorrectAnswers, counterAllQuestions) {
     scoreResults.style.display = "flex";
     scoreCircleText.innerText = `${counterCorrectAnswers}/${counterAllQuestions}`;
 
-    if (counterCorrectAnswers === 10) {
+    if (counterCorrectAnswers / counterAllQuestions === 1) {
         scoreMessage.innerText = "Excellent!";
-    } else if (counterCorrectAnswers >= 8) {
+    } else if (counterCorrectAnswers / counterAllQuestions >= .8) {
         scoreMessage.innerText = "Great job!";
-    } else if (counterCorrectAnswers >= 6) {
+    } else if (counterCorrectAnswers / counterAllQuestions >= .6) {
         scoreMessage.innerText = "Pretty good!";
     } else {
         scoreMessage.innerText = "You'll do better next time!";
