@@ -16,13 +16,13 @@ html, body, footer, h1, p, a, img {
 }
 
 
-/* Default styles are for narrow screens */
+/* || Default styles are for narrow screens */
 /* || GENERAL STYLES */
 :root {
     --dark: #292929;
     --light: #f1f1f1;
+    --focus-outline: #e00000;
 }
-
 
 * {
     box-sizing: border-box;
@@ -51,10 +51,16 @@ a {
     color: var(--light);
 }
 
-/*img {*/
-/*    !*width: 100%;*!*/
-/*    height: 100%;*/
-/*}*/
+button {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+a:focus,
+button:focus {
+    outline-color: var(--focus-outline);
+    tab-index: 0;
+}
 
 
 /* || UTILITIES */
@@ -74,14 +80,6 @@ a {
     border-radius: 20px;
 }
 
-/*.margin-1-top-btm {*/
-/*    margin: 1rem 0;*/
-/*}*/
-
-/*.margin-1-btm {*/
-/*    margin-bottom: 1rem;*/
-/*}*/
-
 .btn-circle {
     font-family: "Press Start 2P", sans-serif;
     font-size: 1rem;
@@ -92,9 +90,14 @@ a {
     border-radius: 50%;
 }
 
-.sprite {
+.sprite,
+#error-sprite {
     justify-self: center;
     width: 75px;
+}
+
+.text-center {
+    text-align: center;
 }
 
 
@@ -104,11 +107,10 @@ a {
     grid-template-rows: repeat(3, 1fr);
     row-gap: 1.25rem;
     padding-left: 2rem;
-    margin-bottom: 1rem;
 }
 
 .answer-options p {
-    height: 1rem;
+    height: 1.75rem;
 }
 
 .option {
@@ -127,7 +129,6 @@ a {
     display: flex;
     flex-direction: column;
     height: 150px;
-    /*margin-top: 1rem;*/
 }
 
 #score-sprite {
@@ -135,7 +136,6 @@ a {
     width: 150px;
     height: 150px;
     margin: 0 auto;
-
 }
 
 #calculating-score {
@@ -191,15 +191,15 @@ footer a {
 /* || MEDIA QUERIES */
 /* Pointer fine */
 @media screen and (pointer: fine) {
-    a.btn-rectangle:hover,
-    a.btn-circle:hover {
+    button.btn-rectangle:hover,
+    button.btn-circle:hover {
         background-color: var(--light);
         color: var(--dark);
         cursor: pointer;
     }
 }
 
-/* Min-width 500 viewport */
+/* Min-width 500px viewport */
 @media screen and (min-width: 500px) {
     #container {
         max-width: 500px;
@@ -216,9 +216,23 @@ footer a {
     }
 }
 
-/* Min-width 1024 viewport */
+/* Min-width 1024px viewport */
 @media screen and (min-width: 1024px) {
     #container {
         margin: 150px auto;
+    }
+}
+
+/* Max-width 280px (Galaxy Fold) */
+@media screen and (max-width: 280px) {
+    #calculating-score {
+        margin-left: 8%;
+    }
+}
+
+/* Min-width 281px (for sizes up to 499px) */
+@media screen and (min-width: 281px) and (max-width: 499px) {
+    #calculating-score {
+        margin-left: 15%;
     }
 }

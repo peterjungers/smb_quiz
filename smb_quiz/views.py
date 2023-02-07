@@ -1,3 +1,14 @@
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+# Program name:     Super Mario Bros. quiz
+# Version:          1.0
+# Author:           Peter Jungers
+# Date:             January/February 2023
+# Description:      Quiz about Super Mario Bros., Super Mario Bros. 2,
+#                   Super Mario Bros. 3; based on an early Python project
+#                   from the summer of 2022.
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
 import random
 from django.shortcuts import render
 from .models import Question
@@ -11,7 +22,7 @@ def quiz(request):
     # Get unique numbers to use as id numbers:
     ids_to_query = []
     while len(ids_to_query) < 10:
-        id = random.randrange(1, 11)
+        id = random.randrange(1, 51)
         if id not in ids_to_query:
             ids_to_query.append(id)
 

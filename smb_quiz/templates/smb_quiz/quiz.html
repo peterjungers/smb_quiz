@@ -11,18 +11,18 @@
         </p>
         <div class="answer-options">
             <div class="option">
-                <a class="btn-circle btn-{{ q.0 }}">A</a>
+                <button class="btn-circle btn-{{ q.0 }}">A</button> {# href="#!" prevents scroll to top when using focus with keyboard press (id of ! doesn't exist) #}
                 <p>{{ q.2.0 }}</p> {# Shuffled answer #}
             </div>
             <div class="option">
-                <a class="btn-circle btn-{{ q.0 }}">B</a>
+                <button class="btn-circle btn-{{ q.0 }}">B</button>
                 <p>{{ q.2.1 }}</p> {# Shuffled answer #}
             </div>
             <div class="option">
-                <a class="btn-circle btn-{{ q.0 }}">C</a>
+                <button class="btn-circle btn-{{ q.0 }}">C</button>
                 <p>{{ q.2.2 }}</p> {# Shuffled answer #}
             </div>
-            <p class="message-{{ q.0 }}"></p>
+            <p id="message-{{ q.0 }}"></p>
         </div>
         <img id="image-{{ q.0 }}" class="sprite" src="" alt="Pixel art">
     {% endfor %}

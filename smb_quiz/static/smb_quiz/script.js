@@ -14,6 +14,7 @@ https://www.peachpit.com/articles/article.aspx?p=2239154&seqNum=10
 */
 function randomizeImages() {
     imageDivs = document.querySelectorAll(".sprite");
+    let images;
     // index page has only two images that always appear:
     if (imageDivs.length === 2) {
         images = imageDivs;
@@ -24,16 +25,16 @@ function randomizeImages() {
             document.querySelector("#image-2"),
             document.querySelector("#image-5"),
             document.querySelector("#image-7")
-        ]
+        ];
     }
 
     /*
     Images in static/images directory are numbered beginning with 1.
     Amount of numbered images in directory is 12.
     */
-    randomNumberArray = []
+    let randomNumberArray = []
     while (randomNumberArray.length < images.length) {
-        randomNumber = Math.floor((Math.random() * 12) + 1);
+        let randomNumber = Math.floor((Math.random() * 12) + 1);
         /* No repeated numbers allowed in randomNumberArray
         so no images get repeated: */
         if (!randomNumberArray.includes(randomNumber)) {
@@ -51,14 +52,14 @@ function showOrHideImages(images) {
     /*
     Because img divs are included programmatically for each quiz question,
     and page design-wise not all questions should be followed by an image,
-    the following is necessary:
+    the following is necessary (note: id score-sprite is not part of
+    images array):
     */
     images.forEach(image => {
         if (image.id === "header-sprite"
             || image.id === "image-2"
             || image.id === "image-5"
-            || image.id === "image-7"
-            || image.id === "score-sprite") {
+            || image.id === "image-7") {
             image.style.display = "block";
         } else {
             image.style.display = "none";
@@ -73,12 +74,12 @@ function showOrHideImages(images) {
 function decodeAnswers() {
     const codedAnswers =
         JSON.parse(document.querySelector("#array").textContent);
-    correctAnswers = [];
+    let correctAnswers = [];
 
     codedAnswers.forEach(answer => {
-        decodedAnswer = "";
+        let decodedAnswer = "";
         for (let i = 0; i < answer.length; i++) {
-            letter = String.fromCharCode(answer[i].charCodeAt(0) - 5);
+            let letter = String.fromCharCode(answer[i].charCodeAt(0) - 5);
             decodedAnswer += letter;
         }
         correctAnswers.push(decodedAnswer);
@@ -88,7 +89,7 @@ function decodeAnswers() {
 
 
 function checkBtnAnswer(correctAnswers) {
-    const optionBtns = document.querySelectorAll(".option a");
+    const optionBtns = document.querySelectorAll(".option button");
     let counterCorrectAnswers = 0;
     let counterAllQuestions = 0;
 
@@ -98,10 +99,10 @@ function checkBtnAnswer(correctAnswers) {
                 // Match index number to actual btn number, hence i + 1
                 if (btn.classList.contains(`btn-${i + 1}`)) {
                     let allOptions = btn.parentElement.parentElement.children;
-                    let message = document.querySelector(`.message-${i + 1}`);
+                    let message = document.querySelector(`#message-${i + 1}`);
 
                     btn.style.backgroundColor = "#f1f1f1";
-                    btn.style.color = "#1a1a1a";
+                    btn.style.color = "#292929";
                     if (btn.nextElementSibling.innerText
                             === correctAnswers[i]) {
                         for (let i = 0; i < allOptions.length; i++) {
@@ -113,6 +114,7 @@ function checkBtnAnswer(correctAnswers) {
                         message.innerText = "Correct!";
                         counterCorrectAnswers += 1;
                         counterAllQuestions += 1;
+
                     } else {
                         for (let i = 0; i < allOptions.length; i++) {
                             allOptions[i].style.opacity = .5;
@@ -120,9 +122,13 @@ function checkBtnAnswer(correctAnswers) {
                         message.innerText = "Sorry, incorrect.";
                         counterAllQuestions += 1;
                     }
-                    // Disable question options after click
+                    /* Disable question options for click
+                    or focus Enter keydown: */
                     for (let i = 0; i < allOptions.length; i++) {
                         allOptions[i].style.pointerEvents = "none";
+                        if (allOptions[i].children[0]) {
+                            allOptions[i].children[0].disabled = true;
+                        }
                     }
                 }
             }

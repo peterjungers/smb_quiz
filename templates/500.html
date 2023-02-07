@@ -1,0 +1,8 @@
+{% extends "smb_quiz/base.html" %}
+{% load static %}
+
+{% block content %}
+    <img id="error-sprite" src="{% static 'smb_quiz/images/2.png' %}" alt="Pixel art">
+    <p class="text-center">Error 404: Page does not exist</p>
+    <a class="btn-rectangle" href="{% url 'smb-quiz-index' %}">Error 500: Something has gone wrong—check back soon</a>
+{% endblock content %}

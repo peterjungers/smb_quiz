@@ -1,0 +1,8 @@
+{% extends "smb_quiz/base.html" %}
+{% load static %}
+
+{% block content %}
+    <img id="error-sprite" src="{% static 'smb_quiz/images/2.png' %}" alt="Pixel art">
+    <p class="text-center">Error 403: Sorry, permission not authorized</p>
+    <a class="btn-rectangle" href="{% url 'smb-quiz-index' %}">Reset</a>
+{% endblock content %}
