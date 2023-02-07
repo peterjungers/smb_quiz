@@ -114,7 +114,6 @@ function checkBtnAnswer(correctAnswers) {
                         message.innerText = "Correct!";
                         counterCorrectAnswers += 1;
                         counterAllQuestions += 1;
-
                     } else {
                         for (let i = 0; i < allOptions.length; i++) {
                             allOptions[i].style.opacity = .5;
@@ -125,7 +124,9 @@ function checkBtnAnswer(correctAnswers) {
                     /* Disable question options for click
                     or focus Enter keydown: */
                     for (let i = 0; i < allOptions.length; i++) {
+                        // Container for all answer options:
                         allOptions[i].style.pointerEvents = "none";
+                        // Each option button:
                         if (allOptions[i].children[0]) {
                             allOptions[i].children[0].disabled = true;
                         }
