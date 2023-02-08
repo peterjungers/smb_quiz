@@ -9,7 +9,7 @@ Date: January/February 2023
 
 
 /* || CSS RESET */
-html, body, footer, h1, p, a, img {
+html, body, div, footer, h1, p, a, img, button {
     margin: 0;
     padding: 0;
     border: 0;
@@ -106,7 +106,7 @@ button:focus {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     row-gap: 1.25rem;
-    padding-left: 2rem;
+    padding: 0 2rem;
 }
 
 .answer-options p {
@@ -140,8 +140,9 @@ button:focus {
 
 #calculating-score {
     display: none;
+    width: 210px;
     margin-top: 9.5%;
-    margin-left: 21%;
+    margin-left: calc(50% - 100px);
 }
 
 #score-results {
@@ -191,7 +192,7 @@ footer a {
 /* || MEDIA QUERIES */
 /* Pointer fine */
 @media screen and (pointer: fine) {
-    button.btn-rectangle:hover,
+    a.btn-rectangle:hover,
     button.btn-circle:hover {
         background-color: var(--light);
         color: var(--dark);
@@ -210,29 +211,11 @@ footer a {
         justify-self: center;
         width: 350px;
     }
-
-    #calculating-score {
-        margin-left: 30%;
-    }
 }
 
 /* Min-width 1024px viewport */
 @media screen and (min-width: 1024px) {
     #container {
         margin: 150px auto;
-    }
-}
-
-/* Max-width 280px (Galaxy Fold) */
-@media screen and (max-width: 280px) {
-    #calculating-score {
-        margin-left: 8%;
-    }
-}
-
-/* Min-width 281px (for sizes up to 499px) */
-@media screen and (min-width: 281px) and (max-width: 499px) {
-    #calculating-score {
-        margin-left: 15%;
     }
 }

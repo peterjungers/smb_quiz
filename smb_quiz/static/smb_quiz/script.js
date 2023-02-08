@@ -124,10 +124,10 @@ function checkBtnAnswer(correctAnswers) {
                     /* Disable question options for click
                     or focus Enter keydown: */
                     for (let i = 0; i < allOptions.length; i++) {
-                        // Container for all answer options:
-                        allOptions[i].style.pointerEvents = "none";
                         // Each option button:
                         if (allOptions[i].children[0]) {
+                            allOptions[i].children[0].style.pointerEvents
+                                = "none";
                             allOptions[i].children[0].disabled = true;
                         }
                     }
