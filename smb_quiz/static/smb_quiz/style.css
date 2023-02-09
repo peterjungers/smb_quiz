@@ -9,7 +9,7 @@ Date: January/February 2023
 
 
 /* || CSS RESET */
-html, body, div, footer, h1, p, a, img, button {
+html, body, div, footer, h1, p, span, a, img, button {
     margin: 0;
     padding: 0;
     border: 0;
