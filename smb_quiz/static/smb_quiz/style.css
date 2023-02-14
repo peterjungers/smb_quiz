@@ -31,6 +31,10 @@ html, body, div, footer, h1, p, span, a, img, button {
 body {
     background-color: var(--dark);
     color: var(--light);
+    /* So font-size doesn't increase when mobile switches to landscape: */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: 100%;
 }
 
 h1 {
